@@ -1,38 +1,37 @@
-// Write a program that takes two coordinate points and outputs the distance between the two points.
-// Example: (x1, y1) and (x2, y2)
-// plane distance is given by sqrt((x1-x2)**2 * (y1-y2)**2).
+#include <cmath>
+#include <iomanip>
+#include <iostream>
 
-import std;
+int main() {
+    constexpr double earth_radius_km = 6371.0;
+    constexpr double degrees_to_radians = 3.14159265358979323846 / 180.0;
 
-int main() // read name and age
-{
-    std::cout << "Please enter coordinates\n";
-    
-    // Initialize coordinate values
-    int x1 = 0;
-    int y1 = 0;
-    int x2 = 0;
-    int y2 = 0;
+    // Approximate coordinates in degrees.
+    constexpr double makerere_latitude = 0.3353;
+    constexpr double makerere_longitude = 32.5680;
+    constexpr double entebbe_latitude = 0.0420;
+    constexpr double entebbe_longitude = 32.4435;
 
-    // Why not initialize as below
-    // int x1, y1, x2, y2 = 0;
+    const double latitude_difference =
+        (entebbe_latitude - makerere_latitude) * degrees_to_radians;
+    const double longitude_difference =
+        (entebbe_longitude - makerere_longitude) * degrees_to_radians;
 
-    std::cin >> x1 >> y1 >> x2 >> y2; // Read coordinate values
+    const double makerere_latitude_radians = makerere_latitude * degrees_to_radians;
+    const double entebbe_latitude_radians = entebbe_latitude * degrees_to_radians;
+    const double haversine =
+        std::sin(latitude_difference / 2) * std::sin(latitude_difference / 2) +
+        std::cos(makerere_latitude_radians) *
+            std::cos(entebbe_latitude_radians) *
+            std::sin(longitude_difference / 2) *
+            std::sin(longitude_difference / 2);
+    const double central_angle = 2 * std::atan2(std::sqrt(haversine),
+                                                 std::sqrt(1 - haversine));
+    const double distance = earth_radius_km * central_angle;
 
-    double sum_of_powers = 0.0;
-    sum_of_powers = std::pow(x1 - x2, 2) + std::pow(y1 - y2, 2);
-
-    double distance = std::sqrt(sum_of_powers); // Calculate distance
-
-    // std::cout << "Distance between coordinates " << '(' <<x1 << ',' << y1 << ')' <<  " and " << '(' <<x2 << ',' << y2 << ')' << " is " << distance << "\n";
-
-    // print
-    std::print("Distance between coordinates ({},{}) and ({},{}) is {}\n", x1, y1, x2, y2, distance);
+    std::cout << std::fixed << std::setprecision(2)
+              << "The distance from Makerere University Freedom Square to "
+              << "Entebbe Airport is approximately " << distance << " km.\n";
 
     return 0;
 }
-
-// Try
-// The distance calculated above is true for a 2D plane.
-// For spherical surfaces such as the Earth, the Haversine formula is used. Reference: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.haversine_distances.html
-// Rewrite this program to calculate the distance Makerere University Freedom Square and Entebbe Airport.
