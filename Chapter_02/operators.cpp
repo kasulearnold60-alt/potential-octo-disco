@@ -7,3 +7,45 @@
 // of type double. Implement this for operations called +, −, ∗, /, plus, minus, mul, and div with
 // their obvious meanings.
 
+#include <iostream>
+#include <string>
+
+int main()
+{
+	std::string operation;
+	double firstOperand;
+	double secondOperand;
+
+	std::cin >> operation >> firstOperand >> secondOperand;
+
+	if (operation == "+" || operation == "plus")
+	{
+		std::cout << "Result: " << firstOperand + secondOperand << '\n';
+	}
+	else if (operation == "-" || operation == "−" || operation == "minus")
+	{
+		std::cout << "Result: " << firstOperand - secondOperand << '\n';
+	}
+	else if (operation == "*" || operation == "∗" || operation == "mul")
+	{
+		std::cout << "Result: " << firstOperand * secondOperand << '\n';
+	}
+	else if (operation == "/" || operation == "div")
+	{
+		if (secondOperand == 0)
+		{
+			std::cout << "Error: division by zero is not allowed.\n";
+		}
+		else
+		{
+			std::cout << "Result: " << firstOperand / secondOperand << '\n';
+		}
+	}
+	else
+	{
+		std::cout << "Error: unknown operation.\n";
+	}
+
+	return 0;
+}
+
