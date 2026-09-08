@@ -1,3 +1,13 @@
 // (Compute expressions) Write a program that displays the result of;
 // (9.5 * 4.5 - 2.5 * 3) / (45.5 - 3.5)
 
+#include <iomanip>
+#include <iostream>
+
+int main() {
+	const double result = (9.5 * 4.5 - 2.5 * 3) / (45.5 - 3.5);
+
+	std::cout << std::fixed << std::setprecision(2) << result << '\n';
+	return 0;
+}
+
