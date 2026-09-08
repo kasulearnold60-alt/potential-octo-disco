@@ -16,6 +16,7 @@ int main()
 	double firstOperand;
 	double secondOperand;
 
+	std::cout << "Enter an operation followed by two floating-point values: ";
 	std::cin >> operation >> firstOperand >> secondOperand;
 
 	if (operation == "+" || operation == "plus")
